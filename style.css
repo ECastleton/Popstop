@@ -1,0 +1,106 @@
+/*
+costumized bootstrap
+*/
+
+@import url(https://fonts.googleapis.com/css?family=PT+Serif);
+
+/*
+.well{
+background-color: #70FFD7;
+}
+*/
+
+body
+{
+	font-family: 'PT Serif', serif;
+}
+ 
+ 
+.navbar 
+{
+	margin-bottom: 0;
+	background-color: #3622FF;
+	z-index: 9999;
+	border: 0;
+	font-size: 20px !important;
+	line-height: 25px; !important;
+	letter-spacing: 4px;
+	border-radius: 0;
+	font-family: 'PT Serif', serif;
+}
+  
+ 
+  .navbar li a, .navbar .navbar-brand 
+{
+	background-color: #3622FF;
+    color: #fff !important;
+	height: 50px;
+	line-height: 25px;
+}
+  
+  .navbar-nav li a:hover, .navbar-nav li.active a 
+ {
+     color: #FF0000 !important;
+     background-color: #3622FF !important;
+	 line-height: 25px;
+}
+.navbar-default .navbar-toggle 
+{
+	background-color: #3622FF;
+	border-color: transparent;
+	color: #fff !important;
+	 line-height: 25px;
+}
+	  
+	  
+.navbar-header.Logo
+{
+	padding-right: 30px;
+	margin-top: -30px;
+	border-top: -30px;
+}
+	  
+	.jumbotron {
+	  text-align: center;
+      background-color: #3622FF;
+      color: #fff;
+      padding: 100px 25px;
+      font-family: 'PT Serif', serif;
+  }
+  
+  .jumboton .h1
+  {
+   padding-left: none;
+   text-align: center;
+  }
+
+body
+{
+	font-size: 20px;
+}
+
+
+#about
+{
+	font-size: 25px;
+}
+
+#location address
+{
+	font-size: 20px;
+}
+
+.carousel-inner > .item > img,
+  .carousel-inner > .item > a > img 
+ {
+	  width: 25%;
+      margin: auto;
+      background-color: #9C166A;
+  }
+  
+  footer
+  {
+  padding-left: 30px;
+  background-color: #9C166A;
+  color: #fff;
+  }
