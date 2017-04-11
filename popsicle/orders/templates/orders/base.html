@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'orders/header.html' %}
+<body>
+
+<!--navigation bar begins-->
+{% include 'orders/navbar.html' %}
+
+<!--title for Home Page begins-->
+<div class="jumbotron text-center">
+  <h1>The Popstop</h1> 
+  <p> Our artisan Pops are hand-made with fresh fruit, dairy and spices every day.<br>Follow us on Twitter feed to find our bicycle carts around town, or visit our Online Store to place a pickup order for a box of Pops made fresh on demand!</p> 
+</div>
+
+<!--Calendar tab-->
+<div id="calendar" class="container-fluid"> 
+  <br>
+  <br> 
+  <div class="row">
+    <div class="col-sm-2"></div>
+    
+    <div class="col-sm-8">
+      <h1>Calendar </h1>
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe src="https://calendar.google.com/calendar/embed?src=vfai9tap17n1ahh1tjc8kscd8c%40group.
+        calendar.google.com&ctz=America/Denver" style="border: 0" width="800" height="600" frameborder="0" 
+        scrolling="no"></iframe>
+      </div>
+    </div>
+    <div class="col-sm-2"></div>
+  </div>
+</div>
+
+<!--Dynamic content goes here-->
+{% block content %}
+{% endblock %}
+
+<br>
+<br>
+
+</body>
+</html>
