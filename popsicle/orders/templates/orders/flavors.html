@@ -1,0 +1,21 @@
+{% extends 'orders/base.html' %}
+
+{% block home_title %}
+{% endblock %}
+
+{% block content %}
+<!--Flavor Tab-->
+<br>
+<br>
+<div id="flavors" class="container-fluid">
+  <h1>Flavor Menu</h1>
+  {% for category in categories %}
+  <h2>{{ category.0 }}</h2>
+  <ul class="list-group">
+    {% for flavor in category.1 %}
+    <li class="list-group-item"><strong>{{ flavor.0 }}</strong> ({{ flavor.1 | join:", "}})</li>
+    {% endfor %}
+  </ul>
+  {% endfor %}
+</div>
+{% endblock %}

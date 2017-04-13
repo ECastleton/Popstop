@@ -6,5 +6,3 @@ __pycache__/*
 Icon?
 desktop.ini
 Thumbs.db
-
-db.sqlite3

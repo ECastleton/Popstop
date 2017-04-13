@@ -1,14 +1,36 @@
 {% extends 'orders/base.html' %}
 
 {% block content %}
+<!--Calendar tab-->
+<div id="calendar" class="container-fluid">
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-2"></div>
+
+    <div class="col-sm-8">
+      <h1>Calendar </h1>
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe src="https://calendar.google.com/calendar/embed?src=vfai9tap17n1ahh1tjc8kscd8c%40group.
+        calendar.google.com&ctz=America/Denver" style="border: 0" width="800" height="600" frameborder="0"
+        scrolling="no"></iframe>
+      </div>
+    </div>
+    <div class="col-sm-2"></div>
+  </div>
+</div>
+
 <!--Flavor Tab-->
-<div id="flavors" class="container-fluid"> 
-  <h1>Flavors </h1>
+<div id="flavors" class="container-fluid">
+  <h1>Flavor Menu</h1>
+  {% for category in flavor_list %}
+  <h2>{{ category.0 }}</h2>
   <ul class="list-group">
-    {% for flavor in flavor_list %}
+    {% for flavor in category.1 %}
     <li class="list-group-item">{{ flavor.0 }} ({{ flavor.1 | join:", "}})</li>
     {% endfor %}
   </ul>
+  {% endfor %}
 </div>
 
 <!--Catering Menu tab-->
