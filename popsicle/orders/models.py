@@ -26,6 +26,14 @@ class Ingredient(models.Model):
             self.date_added = timezone.now()
         return super(Ingredient, self).save(*args, **kwargs)
 
+class Subingredient(models.Model):
+    """A Model representing a subingredient. Use only with Ingredient Model"""
+    name = models.CharField(max_length=100)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
 class Flavor(models.Model):
     """A Model representing a flavor."""
     flavor_name = models.CharField(max_length=100)
@@ -45,6 +53,10 @@ class Flavor(models.Model):
         """Used in admin page for now"""
         ingredients_list = [str(i) for i in self.ingredients.all()]
         return sorted(ingredients_list)
+    
+    def is_new_flavor(self):
+        """"Returns true if the flavor was added in the last 7 days"""
+        pass
 
 class ProductCategory(models.Model):
     """A Model representing a product category (i.e. group of flavors)."""
