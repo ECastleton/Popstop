@@ -23,6 +23,19 @@ class CateringMenuAdmin(admin.ModelAdmin):
     model = CateringMenu
     list_display = ("menu_name", "start_date", "end_date", "date_created")
     ordering = ["start_date"]
+    
+class LocationAdmin(admin.ModelAdmin):
+    model = Location
+    list_display = ("name", "address")
+    ordering = ["name"]
+
+class TimeAdmin(admin.ModelAdmin):
+    model = Time
+    list_display = ("date", "startTime", "endTime")
+    ordering = ["date"]
+
+admin.site.register(Location, LocationAdmin)
+admin.site.register(Time, TimeAdmin)    
 
 admin.site.register(CateringMenu, CateringMenuAdmin)
 admin.site.register(Ingredient, IngredientAdmin)

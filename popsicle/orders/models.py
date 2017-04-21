@@ -93,3 +93,13 @@ class CateringMenu(models.Model):
 
     def __str__(self):
         return self.menu_name
+        
+class Location(models.Model):
+	name = models.CharField(max_length=30)
+	address = models.CharField(max_length=50)
+
+class Time(models.Model):
+	date = models.DateField()
+	locationName = models.CharField(max_length=30)
+	startTime = models.CharField(max_length=7)
+	endTime = models.CharField(max_length=7)        

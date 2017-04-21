@@ -1,8 +1,9 @@
 from django.conf.urls import url
-from .views import main, catering_menu, flavor_menu
+from .views import main, catering_menu, flavor_menu, listEvents
 
 urlpatterns = [
     url(r'^$', main),
     url(r"^flavors/", flavor_menu),
-    url(r"^catering/", catering_menu)
+    url(r"^catering/", catering_menu),
+    url(r"^event/", listEvents)
 ]

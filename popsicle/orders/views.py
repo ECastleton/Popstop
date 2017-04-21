@@ -1,7 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+import datetime
 
-from .models import Flavor, CateringMenu, ProductCategory
+from .models import Flavor, CateringMenu, ProductCategory, Location, Time
 
 def list_flavors(flavors=Flavor.objects.all):
     flavor_list = []
@@ -11,6 +12,18 @@ def list_flavors(flavors=Flavor.objects.all):
             (str(flavor), sorted(ingredients))
         )
     return sorted(flavor_list)
+
+def listEvents(events=Time.objects.all):
+	weekEvents = {'Monday':{},'Tuesday':{}, 'Wednesday':{}, 'Thursday':{}, 'Friday':{}, 'Saturday':{},'Sunday':{}}
+	weekDays = ['Monday','Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday']
+	for i in range(0,len(weekDays)):
+		for event in events():
+			if event.date.weekday()==i:
+			  #event.location.replace(' ','+')
+			  weekEvents[weekDays[i]]["locationName"]=event.locationName
+			  weekEvents[weekDays[i]]["address"]="341+Music+Lane,+Grand+Junction+CO"
+	return weekEvents		  
+		
 
 def flavor_menu(request):
     categories = ProductCategory.objects.all()
@@ -54,5 +67,6 @@ def main(request):
             "flavors": flavors
         }
         context["cater_menu"] = menu_context
+    context["weekEvents"]=  listEvents()  
 
     return render(request, "orders/main.html", context)

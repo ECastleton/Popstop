@@ -3,22 +3,40 @@
 {% block content %}
 <!--Calendar tab-->
 <div id="calendar" class="container-fluid">
+	<style>
+		td{
+			width:14%;
+		}
+	</style>
   <br>
   <br>
-  <div class="row">
-    <div class="col-sm-2"></div>
-
-    <div class="col-sm-8">
-      <h1>Calendar </h1>
-      <div class="embed-responsive embed-responsive-16by9">
-        <iframe src="https://calendar.google.com/calendar/embed?src=vfai9tap17n1ahh1tjc8kscd8c%40group.
-        calendar.google.com&ctz=America/Denver" style="border: 0" width="800" height="600" frameborder="0"
-        scrolling="no"></iframe>
-      </div>
-    </div>
-    <div class="col-sm-2"></div>
-  </div>
+      <h1>Calendar </h1>        
+	  <table class="table table-bordered">
+		<thead>
+		  <tr>
+			<th>Sunday</th>
+			<th>Monday</th>
+			<th>Tuesday</th>
+			<th>Wednesday</th>
+			<th>Thursday</th>
+			<th>Friday</th>
+			<th>Saturday</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr>
+			<td><a href='https://www.google.com/maps/place/{{ weekEvents.Sunday.address }}'>{{ weekEvents.Sunday.locationName }}</a></td>
+			<td><a href='https://www.google.com/maps/place/{{ weekEvents.Monday.address }}'>{{ weekEvents.Monday.locationName }}</a></td>
+			<td><a href='https://www.google.com/maps/place/{{ weekEvents.Tuesday.address }}'>{{ weekEvents.Tuesday.locationName }}</a></td>
+			<td><a href='https://www.google.com/maps/place/{{ weekEvents.Wednesday.address }}'>{{ weekEvents.Wednesday.locationName }}</a></td>
+			<td><a href='https://www.google.com/maps/place/{{ weekEvents.Thursday.address }}'>{{ weekEvents.Thursday.locationName }}</a></td>
+			<td><a href='https://www.google.com/maps/place/{{ weekEvents.Friday.address }}'>{{ weekEvents.Friday.locationName }}</a></td>
+			<td><a href='https://www.google.com/maps/place/{{ weekEvents.Saturday.address }}'>{{ weekEvents.Saturday.locationName }}</a></td> 
+		  </tr>
+		</tbody>
+	  </table>
 </div>
+  
 
 <!--Flavor Tab-->
 <div id="flavors" class="container-fluid">
