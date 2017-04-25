@@ -11,7 +11,6 @@ from django.utils import timezone
 class Ingredient(models.Model):
     """A Model representing an ingredient.
     An ingredient can be used up to once per flavor Model."""
-    # TODO: Add optional subingredient Model
     ingredient_name = models.CharField(max_length=100)
     date_added = models.DateTimeField(editable=False)
 
@@ -53,7 +52,7 @@ class Flavor(models.Model):
         """Used in admin page for now"""
         ingredients_list = [str(i) for i in self.ingredients.all()]
         return sorted(ingredients_list)
-    
+
     def is_new_flavor(self):
         """"Returns true if the flavor was added in the last 7 days"""
         pass
@@ -93,13 +92,3 @@ class CateringMenu(models.Model):
 
     def __str__(self):
         return self.menu_name
-        
-class Location(models.Model):
-	name = models.CharField(max_length=30)
-	address = models.CharField(max_length=50)
-
-class Time(models.Model):
-	date = models.DateField()
-	locationName = models.CharField(max_length=30)
-	startTime = models.CharField(max_length=7)
-	endTime = models.CharField(max_length=7)        

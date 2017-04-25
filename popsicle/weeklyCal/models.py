@@ -1,15 +1,12 @@
-from __future__ import unicode_literals
-
 from django.db import models
+from django.utils import timezone
 
-# Create your models here.
-    
 class Location(models.Model):
-	name = models.CharField(max_length=30)
-	address = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
+    address = models.CharField(max_length=50)
+    date = models.DateField(default=timezone.now)
+    start_time = models.TimeField(default=timezone.now)
+    end_time = models.TimeField(default=timezone.now)
 
-class Time(models.Model):
-	date = models.DateField()
-	locationName = models.CharField(max_length=30)
-	startTime = models.CharField(max_length=7)
-	endTime = models.CharField(max_length=7)
+    def __str__(self):
+        return "%s (%s)" % (self.name, self.date)
