@@ -1,8 +1,18 @@
 from django.shortcuts import render
-from .models import Location
+from .models import TimeSlot
 
-def listEvents(events=Location.objects.all):
-	weekEvents = {
+DAYS = (
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+)
+
+def list_events(request, times=TimeSlot.objects.all):
+    week_events = {
         'Monday':{},
         'Tuesday':{},
         'Wednesday':{},
@@ -11,11 +21,12 @@ def listEvents(events=Location.objects.all):
         'Saturday':{},
         'Sunday':{}
     }
-	weekDays = ['Monday','Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday']
-	for i in range(0,len(weekDays)):
-		for event in events():
-			if event.date.weekday()==i:
-			  #event.location.replace(' ','+')
-			  weekEvents[weekDays[i]]["locationName"]=event.locationName
-			  weekEvents[weekDays[i]]["address"]="341+Music+Lane,+Grand+Junction+CO"
-	return weekEvents
+    for i in range(7):
+        for timeslot in times():
+            if timeslot.date.weekday() != i:
+                continue
+
+            location = timeslot.location
+            week_events[DAYS[i]]["locationName"] = location.name
+            week_events[DAYS[i]]["address"] = str(location.address).replace(" ","+")
+    return render(request, "weeklyCal/calendar.html", week_events)

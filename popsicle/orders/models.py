@@ -33,11 +33,39 @@ class Subingredient(models.Model):
     def __str__(self):
         return self.name
 
+class ProductCategory(models.Model):
+    """A Model representing a product category (i.e. group of flavors)."""
+    category_name = models.CharField(max_length=100)
+    date_added = models.DateTimeField(editable=False)
+
+    def __str__(self):
+        return self.category_name
+
+    class Meta:
+        ordering = ["category_name"]
+        verbose_name = "category"
+        verbose_name_plural = "categories"
+
+    def save(self, *args, **kwargs):
+        """Set date_added field to current time on save."""
+        if not self.id:
+            self.date_added = timezone.now()
+        return super(ProductCategory, self).save(*args, **kwargs)
+    
+    def get_flavors(self):
+        """Returns list of flavors in a category."""
+        return list(self.flavor_set.all())
+
 class Flavor(models.Model):
     """A Model representing a flavor."""
     flavor_name = models.CharField(max_length=100)
+    category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE,
+        default=0)
     ingredients = models.ManyToManyField(Ingredient)
     date_added = models.DateTimeField(editable=False)
+
+    class Meta:
+        ordering = ["flavor_name"]
 
     def save(self, *args, **kwargs):
         """Set date_added field to current time on save"""
@@ -57,21 +85,6 @@ class Flavor(models.Model):
         """"Returns true if the flavor was added in the last 7 days"""
         pass
 
-class ProductCategory(models.Model):
-    """A Model representing a product category (i.e. group of flavors)."""
-    category_name = models.CharField(max_length=100)
-    flavors = models.ManyToManyField(Flavor)
-    date_added = models.DateTimeField(editable=False)
-
-    def __str__(self):
-        return self.category_name
-
-    def save(self, *args, **kwargs):
-        """Set date_added field to current time on save."""
-        if not self.id:
-            self.date_added = timezone.now()
-        return super(ProductCategory, self).save(*args, **kwargs)
-
 class CateringMenu(models.Model):
     """A Model representing a Catering Menu."""
     menu_name = models.CharField(max_length=100)
@@ -81,8 +94,8 @@ class CateringMenu(models.Model):
     # TODO: On save, check dates if:
     #       - start_date is earlier than end_date
     #       - difference between start_date and end_date is at least 24 hours
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
+    start_date = models.DateField()
+    end_date = models.DateField()
 
     def save(self, *args, **kwargs):
         """Set date_created field to current time on save."""
@@ -92,3 +105,6 @@ class CateringMenu(models.Model):
 
     def __str__(self):
         return self.menu_name
+    
+    def is_active(self):
+        pass

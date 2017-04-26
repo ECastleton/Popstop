@@ -7,10 +7,11 @@ class SubingredientInline(admin.StackedInline):
 
 class FlavorAdmin(admin.ModelAdmin):
     model = Flavor
-    list_display = ("flavor_name", "ingredients_list", "date_added")
+    list_display = ("flavor_name", "category", "ingredients_list", "date_added")
     search_fields = ["flavor_name"]
     ordering = ["flavor_name"]
     filter_horizontal = ["ingredients"]
+    list_filter = ["category"]
 
 class IngredientAdmin(admin.ModelAdmin):
     model = Ingredient

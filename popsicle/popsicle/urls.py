@@ -20,5 +20,6 @@ from popsicle.views import hello
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^hello/$', hello),
+    url(r"", include("weeklyCal.urls")),
     url(r"", include("orders.urls"))
 ]

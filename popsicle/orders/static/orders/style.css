@@ -14,9 +14,9 @@ body
 {
 	font-family: 'PT Serif', serif;
 }
- 
- 
-.navbar 
+
+
+.navbar
 {
 	margin-bottom: 0;
 	background-color: #3622FF;
@@ -28,46 +28,46 @@ body
 	border-radius: 0;
 	font-family: 'PT Serif', serif;
 }
-  
- 
-  .navbar li a, .navbar .navbar-brand 
+
+
+  .navbar li a, .navbar .navbar-brand
 {
 	background-color: #3622FF;
-    color: #fff !important;
+	color: #fff !important;
 	height: 50px;
 	line-height: 25px;
 }
-  
+
   .navbar-nav li a:hover, .navbar-nav li.active a, .jumbotron a
  {
-     color: #FF0000 !important;
-     background-color: #3622FF !important;
+	 color: #FF0000 !important;
+	 background-color: #3622FF !important;
 	 line-height: 25px;
 }
-.navbar-default .navbar-toggle 
+.navbar-default .navbar-toggle
 {
 	background-color: #3622FF;
 	border-color: transparent;
 	color: #fff !important;
 	line-height: 25px;
 }
-	  
-	  
+
+
 .navbar-header.Logo
 {
 	padding-right: 30px;
 	margin-top: -30px;
 	border-top: -30px;
 }
-	  
+
 	.jumbotron {
 	  text-align: center;
-      background-color: #3622FF;
-      color: #fff;
-      padding: 100px 25px;
-      font-family: 'PT Serif', serif;
+	  background-color: #3622FF;
+	  color: #fff;
+	  padding: 100px 25px;
+	  font-family: 'PT Serif', serif;
   }
-  
+
   .jumboton .h1
   {
    padding-left: none;
@@ -85,19 +85,27 @@ body
 	font-size: 25px;
 }
 
+#calendar td{
+	width: 14%;
+}
+
+#calendar table{
+	width: 100%;
+}
+
 #location address
 {
 	font-size: 20px;
 }
 
 .carousel-inner > .item > img,
-  .carousel-inner > .item > a > img 
+  .carousel-inner > .item > a > img
  {
 	  width: 25%;
-      margin: auto;
-      background-color: #9C166A;
+	  margin: auto;
+	  background-color: #9C166A;
   }
-  
+
 footer {
 	padding: 1em 1em;
 	background-color: #3622FF;
