@@ -15,7 +15,19 @@ class TimeSlot(models.Model):
     end_time = models.TimeField(default=timezone.now)
 
     def __str__(self):
-        return "%s at %s-%s" % (self.date, self.start_time, self.end_time)
+        return "%s, %s-%s" % (self.date, self.start_time, self.end_time)
 
     def get_location_address(self):
         return location.address
+    
+    def is_for_this_week(self):
+        """Returns True if a TimeSlot's date was set to a day in the
+        current week.
+        
+        This is done by comparing the year and ISO week numbers of the current
+        date and that of a TimeSlot object"""
+        current_year, current_week = timezone.now().isocalendar()[:2]
+        timeslot_year, timeslot_week = self.date.isocalendar()[:2]
+        if (timeslot_year, timeslot_week) == (current_year, current_week):
+            return True
+        return False

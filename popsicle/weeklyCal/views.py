@@ -25,6 +25,8 @@ def list_events(request, times=TimeSlot.objects.all):
         for timeslot in times():
             if timeslot.date.weekday() != i:
                 continue
+            if not timeslot.is_for_this_week():
+                continue
 
             location = timeslot.location
             week_events[DAYS[i]]["locationName"] = location.name
