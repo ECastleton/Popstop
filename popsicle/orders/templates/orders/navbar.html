@@ -15,9 +15,16 @@
         <li><a href="/">Calendar</a></li>
         <li><a href="/flavors">Flavors</a></li>
         <li><a href="/catering">Catering Menu</a></li>
-        <li><a href="https://squareup.com/store/the-pop-stop-inc">Order</a></li>
-        
+        <li><a onclick="emailPopup()">Order</a></li>
       </ul>
     </div>
   </div>
 </nav>
+
+<script>
+<!-- Rayna wrote -->
+function emailPopup() {
+    var email = prompt("Please enter your email:", "");
+    window.location.href= 'https://squareup.com/store/the-pop-stop-inc';
+}
+</script>
