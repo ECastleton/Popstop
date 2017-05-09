@@ -4,19 +4,52 @@
 {% endblock %}
 
 {% block content %}
-<br>
-<br>
-<div id="catering" class="container-fluid">	
+<!--<div id="catering" class="container-fluid">	
   <h1>Catering Menu</h1>
   {% if menu_name %}
   <h2>{{ menu_name }}</h2>
     <ul class="list-group">
       {% for flavor in flavors %}
-      <li class="list-group-item">{{ flavor.0 }} ({{ flavor.1 | join:", "}})</li>
+      <li class="list-group-item">{{ flavor.0 }} ({% for ingredient in flavor.1 %}{{ ingredient.0 }}{% if ingredient.1 %} [{{ ingredient.1 | join:", "}}]{% endif %}, {% endfor %})</li>
       {% endfor %}
     </ul>
     {% else %}
     <p>Sorry, we don't do catering right now.</p>
   {% endif %}
+</div>-->
+
+<div id="catering-new" class="container">	
+  <h1>Catering Menu</h1>
+  {% if menu_name %}
+  <h2>{{ menu_name }}</h2>
+  <div class="panel-group" id="accordion">
+    {% for flavor in flavors %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ flavor.collapse_id }}"><strong>{{ flavor.name }}</strong></a>
+        </h2>
+      </div>
+      <div id="collapse{{ flavor.collapse_id }}" class="panel-collapse collapse">
+        <div class="panel-body container">
+          {% if flavor.description %}
+          <p><i>{{ flavor.description }}</i></p>
+          {% else %}
+          <p><i>No description available.</i></p>
+          {% endif %}
+          <h3>Ingredients</h3>
+          <ul>
+          {% for ingredient in flavor.ingredients %}
+            <li>{{ ingredient.0 }}{% if ingredient.1 %} ({{ ingredient.1 | join:", " }}){% endif %}</li>
+          {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>Sorry, we don't do catering right now.</p>
+  {% endif %}
+  </div>
 </div>
 {% endblock %}

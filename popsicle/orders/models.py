@@ -5,6 +5,7 @@
 # See https://docs.djangoproject.com/en/1.10/topics/db/models/#many-to-many-relationships
 # for more info
 
+from datetime import timedelta
 from django.db import models
 from django.utils import timezone
 
@@ -51,14 +52,15 @@ class ProductCategory(models.Model):
         if not self.id:
             self.date_added = timezone.now()
         return super(ProductCategory, self).save(*args, **kwargs)
-    
+
     def get_flavors(self):
         """Returns list of flavors in a category."""
         return list(self.flavor_set.all())
 
 class Flavor(models.Model):
     """A Model representing a flavor."""
-    flavor_name = models.CharField(max_length=100)
+    flavor_name = models.CharField(max_length=50)
+    description = models.CharField(max_length=100, default="")
     category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE,
         default=0)
     ingredients = models.ManyToManyField(Ingredient)
@@ -83,7 +85,8 @@ class Flavor(models.Model):
 
     def is_new_flavor(self):
         """"Returns true if the flavor was added in the last 7 days"""
-        pass
+        one_week_ago = timezone.now() - timedelta(days=7)
+        return self.date_added < one_week_ago
 
 class CateringMenu(models.Model):
     """A Model representing a Catering Menu."""
@@ -94,8 +97,11 @@ class CateringMenu(models.Model):
     # TODO: On save, check dates if:
     #       - start_date is earlier than end_date
     #       - difference between start_date and end_date is at least 24 hours
-    start_date = models.DateField()
-    end_date = models.DateField()
+    start_date = models.DateField(default=timezone.now)
+    end_date = models.DateField(default=timezone.now)
+
+    class Meta:
+        ordering = ["-start_date"] # Sort by most recent date first
 
     def save(self, *args, **kwargs):
         """Set date_created field to current time on save."""
@@ -105,6 +111,11 @@ class CateringMenu(models.Model):
 
     def __str__(self):
         return self.menu_name
-    
+
     def is_active(self):
-        pass
+        """Returns True if current date is within the range of start_date
+        and end_date."""
+        now = timezone.now().date()
+        return self.start_date <= now <= self.end_date
+
+    is_active.boolean = True

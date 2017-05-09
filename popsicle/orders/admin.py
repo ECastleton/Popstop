@@ -1,7 +1,8 @@
 from django.contrib import admin
+from django import forms
 from .models import Ingredient, Subingredient, Flavor, CateringMenu, ProductCategory
 
-class SubingredientInline(admin.StackedInline):
+class SubingredientInline(admin.TabularInline):
     model = Subingredient
     extra = 0
 
@@ -20,10 +21,24 @@ class IngredientAdmin(admin.ModelAdmin):
     ordering = ["ingredient_name"]
     inlines = [SubingredientInline]
 
+class CateringMenuAdminForm(forms.ModelForm):
+    class Meta:
+        model = CateringMenu
+        fields = ("menu_name", "flavors", "start_date", "end_date")
+    
+    def clean(self):
+        """Validates start and end dates of a menu upon saving."""
+        data = self.cleaned_data
+        if not data.get("start_date") < data.get("end_date"):
+            raise forms.ValidationError("Start date must be earlier than end date")
+        return data
+
 class CateringMenuAdmin(admin.ModelAdmin):
     model = CateringMenu
-    list_display = ("menu_name", "start_date", "end_date", "date_created")
-    ordering = ["start_date"]
+    form = CateringMenuAdminForm
+    list_display = ("menu_name", "is_active", "start_date", "end_date", "date_created")
+    ordering = ["-start_date"]
+    filter_horizontal = ["flavors"]
 
 admin.site.register(CateringMenu, CateringMenuAdmin)
 admin.site.register(Ingredient, IngredientAdmin)

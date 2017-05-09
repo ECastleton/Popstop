@@ -5,17 +5,38 @@
 
 {% block content %}
 <!--Flavor Tab-->
-<br>
-<br>
-<div id="flavors" class="container-fluid">
-  <h1>Flavor Menu</h1>
+
+<div id="flavors" class="container">
+  <h1>Our Flavors</h1>
+  <p>Choose a flavor to reveal its description and ingredients.</p>
   {% for category in categories %}
-  <h2>{{ category.0 }}</h2>
-  <ul class="list-group">
-    {% for flavor in category.1 %}
-    <li class="list-group-item"><strong>{{ flavor.0 }}</strong> ({{ flavor.1 | join:", "}})</li>
+  <h2>{{ category.name }}</h2>
+  <div class="panel-group" id="accordion{{ category.accordion_id }}">
+    {% for flavor in category.flavors %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion{{ category.accordion_id }}" href="#collapse{{ flavor.collapse_id }}"><strong>{{ flavor.name }}</strong></a>
+        </h2>
+      </div>
+      <div id="collapse{{ flavor.collapse_id }}" class="panel-collapse collapse">
+        <div class="panel-body container">
+          {% if flavor.description %}
+          <p><i>{{ flavor.description }}</i></p>
+          {% else %}
+          <p><i>No description available.</i></p>
+          {% endif %}
+          <h3>Ingredients</h3>
+          <ul>
+          {% for ingredient in flavor.ingredients %}
+            <li>{{ ingredient.0 }}{% if ingredient.1 %} ({{ ingredient.1 | join:", " }}){% endif %}</li>
+          {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
     {% endfor %}
-  </ul>
+  </div>
   {% endfor %}
 </div>
 {% endblock %}
